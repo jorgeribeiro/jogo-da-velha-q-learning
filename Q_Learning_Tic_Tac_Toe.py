@@ -88,7 +88,7 @@ class Game:
 
     def declare_outcome(self):
         if self.board.winner() is None:
-            print("Cat's game.")
+            print("Tie.")
         else:
             print(("The game is over. The player with mark {mark} won!".format(mark=self.current_player.mark)))
 
