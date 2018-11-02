@@ -1,7 +1,7 @@
 import numpy as np
 import tkinter as tk
 import copy
-import pickle as pickle    # cPickle is for Python 2.x only; in Python 3, simply "import pickle" and the accelerated version will be used automatically if available
+import pickle as pickle
 
 class Game:
     def __init__(self, master, player1, player2, Q_learn=None, Q={}, alpha=0.3, gamma=0.9):
@@ -44,7 +44,8 @@ class Game:
     def Q_learn(self, _Q_learn):
         self._Q_learn = _Q_learn
 
-    def share_Q_with_players(self):             # The action value table Q is shared with the QPlayers to help them make their move decisions
+    # The action value table Q is shared with the QPlayers to help them make their move decisions
+    def share_Q_with_players(self):
         if isinstance(self.player1, QPlayer):
             self.player1.Q = self.Q
         if isinstance(self.player2, QPlayer):
