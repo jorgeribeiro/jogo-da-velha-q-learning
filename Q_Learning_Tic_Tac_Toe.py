@@ -265,8 +265,9 @@ class QPlayer(ComputerPlayer):
             elif self.mark == "O":
                 return QPlayer.stochastic_argminmax(Qs, min)
 
+    # Make a dictionary key for the current state (board + player turn) and if Q does not yet have it, add it to Q
     @staticmethod
-    def make_and_maybe_add_key(board, mark, Q):     # Make a dictionary key for the current state (board + player turn) and if Q does not yet have it, add it to Q
+    def make_and_maybe_add_key(board, mark, Q):
         default_Qvalue = 1.0       # Encourages exploration
         state_key = board.make_key(mark)
         if Q.get(state_key) is None:
@@ -274,8 +275,9 @@ class QPlayer(ComputerPlayer):
             Q[state_key] = {move: default_Qvalue for move in moves}    # The available moves in each state are initially given a default value of zero
         return state_key
 
+    # Determines either the argmin or argmax of the array Qs such that if there are 'ties', one is chosen at random
     @staticmethod
-    def stochastic_argminmax(Qs, min_or_max):       # Determines either the argmin or argmax of the array Qs such that if there are 'ties', one is chosen at random
+    def stochastic_argminmax(Qs, min_or_max):
         min_or_maxQ = min_or_max(list(Qs.values()))
         if list(Qs.values()).count(min_or_maxQ) > 1:      # If there is more than one move corresponding to the maximum Q-value, choose one at random
             best_options = [move for move in list(Qs.keys()) if Qs[move] == min_or_maxQ]
