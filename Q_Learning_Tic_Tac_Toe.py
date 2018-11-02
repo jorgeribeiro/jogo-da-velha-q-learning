@@ -8,7 +8,7 @@ class Game:
         frame = tk.Frame()
         frame.grid()
         self.master = master
-        master.title("Tic Tac Toe")
+        master.title("Jogo da Velha")
 
         self.player1 = player1
         self.player2 = player2
@@ -23,7 +23,7 @@ class Game:
                 self.buttons[i][j] = tk.Button(frame, height=3, width=3, text=self.empty_text, command=lambda i=i, j=j: self.callback(self.buttons[i][j]))
                 self.buttons[i][j].grid(row=i, column=j)
 
-        self.reset_button = tk.Button(text="Reset", command=self.reset)
+        self.reset_button = tk.Button(text="Reiniciar jogo", command=self.reset)
         self.reset_button.grid(row=3)
 
         self.Q_learn = Q_learn
@@ -89,12 +89,12 @@ class Game:
 
     def declare_outcome(self):
         if self.board.winner() is None:
-            print("Tie.")
+            print("Empate.")
         else:
             print(("The game is over. The player with mark {mark} won!".format(mark=self.current_player.mark)))
 
     def reset(self):
-        print("Resetting...")
+        print("Reiniciando...")
         for i in range(3):
             for j in range(3):
                 self.buttons[i][j].configure(text=self.empty_text)
