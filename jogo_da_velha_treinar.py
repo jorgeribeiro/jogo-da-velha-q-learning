@@ -11,9 +11,7 @@ player1 = QPlayer(mark="X", epsilon=epsilon)
 player2 = QPlayer(mark="O", epsilon=epsilon)
 game = Game(root, player1, player2)
 
-exit()
-
-N_episodes = 200000
+N_episodes = 5000
 for episodes in range(N_episodes):
     game.play()
     game.reset()    

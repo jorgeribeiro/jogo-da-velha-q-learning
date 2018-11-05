@@ -128,7 +128,8 @@ class Game:
         move = self.current_player.get_move(self.board)
         self.handle_move(move)
 
-    def learn_Q(self, move):                        # If Q-learning is toggled on, "learn_Q" should be called after receiving a move from an instance of Player and before implementing the move (using Board's "place_mark" method)
+    # If Q-learning is toggled on, "learn_Q" should be called after receiving a move from an instance of Player and before implementing the move (using Board's "place_mark" method)
+    def learn_Q(self, move):
         state_key = QPlayer.make_and_maybe_add_key(self.board, self.current_player.mark, self.Q)
         next_board = self.board.get_next_board(move, self.current_player.mark)
         reward = next_board.give_reward()
@@ -162,7 +163,7 @@ class Board:
         elif any_lane(np.zeros(3)):
             return "O"
 
-    def over(self):             # The game is over if there is a winner or if no squares remain empty (cat's game)
+    def over(self):             # The game is over if there is a winner or if no squares remain empty
         return (not np.any(np.isnan(self.grid))) or (self.winner() is not None)
 
     def place_mark(self, move, mark):       # Place a mark on the board
@@ -226,26 +227,6 @@ class RandomPlayer(ComputerPlayer):
         moves = board.available_moves()
         if moves:   # If "moves" is not an empty list (as it would be if cat's game were reached)
             return moves[np.random.choice(len(moves))]    # Apply random selection to the index, as otherwise it will be seen as a 2D array
-
-class THandPlayer(ComputerPlayer):
-    def __init__(self, mark):
-        super(THandPlayer, self).__init__(mark=mark)
-
-    def get_move(self, board):
-        moves = board.available_moves()
-        if moves:
-            for move in moves:
-                if THandPlayer.next_move_winner(board, move, self.mark):
-                    return move
-                elif THandPlayer.next_move_winner(board, move, self.opponent_mark):
-                    return move
-            else:
-                return RandomPlayer.get_move(board)
-
-    @staticmethod
-    def next_move_winner(board, move, mark):
-        return board.get_next_board(move, mark).winner() == mark
-
 
 class QPlayer(ComputerPlayer):
     def __init__(self, mark, Q={}, epsilon=0.2):
