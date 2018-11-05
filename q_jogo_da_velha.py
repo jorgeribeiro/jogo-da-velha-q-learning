@@ -1,7 +1,7 @@
 import numpy as np
 import tkinter as tk
-import copy
 import pickle as pickle
+import copy
 
 class Game:
     def __init__(self, master, player1, player2, Q_learn=None, Q={}, alpha=0.3, gamma=0.9):

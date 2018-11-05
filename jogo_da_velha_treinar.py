@@ -1,7 +1,8 @@
 import numpy as np
 import tkinter as tk
+import pickle as pickle
 import copy
-import pickle
+
 from q_jogo_da_velha import Game, QPlayer
 
 root = tk.Tk()
@@ -10,10 +11,12 @@ player1 = QPlayer(mark="X", epsilon=epsilon)
 player2 = QPlayer(mark="O", epsilon=epsilon)
 game = Game(root, player1, player2)
 
-N_episodes = 5000
+exit()
+
+N_episodes = 200000
 for episodes in range(N_episodes):
     game.play()
-    game.reset()
+    game.reset()    
 
 Q = game.Q
 

@@ -1,12 +1,11 @@
 import numpy as np
 import tkinter as tk
-import copy
 import pickle as pickle
+import copy
 
 from q_jogo_da_velha import Game, HumanPlayer, QPlayer
 
-
-Q = pickle.load(open("aprendizado_q_5000.p", "rb"))
+Q = pickle.load(open("aprendizado_q_200000.p", "rb"))
 
 root = tk.Tk()
 player1 = HumanPlayer(mark="X")
