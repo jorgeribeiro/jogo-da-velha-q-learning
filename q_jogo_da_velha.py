@@ -141,7 +141,7 @@ class Game:
             if self.current_player.mark == "X":
                 expected = reward + (self.gamma * min(next_Qs.values()))        # If the current player is X, the next player is O, and the move with the minimum Q value should be chosen according to our "sign convention"
             elif self.current_player.mark == "O":
-                expected = reward + (self.gamma * max(next_Qs.values()))        # If the current player is O, the next player is X, and the move with the maximum Q vlue should be chosen
+                expected = reward + (self.gamma * max(next_Qs.values()))        # If the current player is O, the next player is X, and the move with the maximum Q value should be chosen
         change = self.alpha * (expected - self.Q[state_key][move])
         self.Q[state_key][move] += change
 
@@ -183,13 +183,15 @@ class Board:
         next_board.place_mark(move, mark)
         return next_board
 
-    def make_key(self, mark):          # For Q-learning, returns a 10-character string representing the state of the board and the player whose turn it is
+    # For Q-learning, returns a 10-character string representing the state of the board and the player whose turn it is
+    def make_key(self, mark):
         fill_value = 9
         filled_grid = copy.deepcopy(self.grid)
         np.place(filled_grid, np.isnan(filled_grid), fill_value)
         return "".join(map(str, (list(map(int, filled_grid.flatten()))))) + mark
 
-    def give_reward(self):                          # Assign a reward for the player with mark X in the current board position.
+    # Assign a reward for the player with mark X in the current board position.
+    def give_reward(self):
         if self.over():
             if self.winner() is not None:
                 if self.winner() == "X":
