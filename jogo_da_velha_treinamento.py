@@ -2,7 +2,7 @@ import numpy as np
 import tkinter as tk
 import copy
 import pickle
-from Q_Learning_Tic_Tac_Toe import Game, QPlayer     # Classes used for Tic Tac Toe
+from q_jogo_da_velha import Game, QPlayer
 
 root = tk.Tk()
 epsilon = 0.9
@@ -17,5 +17,5 @@ for episodes in range(N_episodes):
 
 Q = game.Q
 
-filename = "Q_epsilon_09_Nepisodes_{}.p".format(N_episodes)
+filename = "aprendizado_q_{}.p".format(N_episodes)
 pickle.dump(Q, open(filename, "wb"))
