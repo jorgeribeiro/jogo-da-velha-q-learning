@@ -6,7 +6,7 @@ import pickle as pickle
 from q_jogo_da_velha import Game, HumanPlayer, QPlayer
 
 
-Q = pickle.load(open("Q_epsilon_09_Nepisodes_200000.p", "rb"))
+Q = pickle.load(open("aprendizado_q_200000.p", "rb"))
 
 root = tk.Tk()
 player1 = HumanPlayer(mark="X")

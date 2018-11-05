@@ -91,7 +91,7 @@ class Game:
         if self.board.winner() is None:
             print("Empate.")
         else:
-            print(("The game is over. The player with mark {mark} won!".format(mark=self.current_player.mark)))
+            print(("Jogo finalizado. O jogador {mark} venceu.".format(mark=self.current_player.mark)))
 
     def reset(self):
         print("Reiniciando...")
@@ -212,7 +212,7 @@ class Player(object):
         elif self.mark == 'O':
             return 'X'
         else:
-            print("The player's mark must be either 'X' or 'O'.")
+            print("A marca do jogador precisa ser 'X' ou 'O'.")
 
 class HumanPlayer(Player):
     pass
