@@ -190,19 +190,6 @@ class TTTGameNode:
 
 	@staticmethod
 	def generateBitReps(board):
-		"""
-		Returns a tuple of 9-bit representations (x,o).
-		This method is private and only called in TTTGameNode's constructor.
-		For instance, the X bit representation is 111000000 and
-		the O bit representation is 000110110 for the following board:
-
-		 X | X | X  
-		---+---+---
-		 O | O |    
-		---+---+---
-		 O | O |    
-
-		"""
 		intX = 0
 		intO = 0
 		mask = 0b100000000
@@ -217,11 +204,6 @@ class TTTGameNode:
 
 	@staticmethod
 	def numMissing(xRep,oRep):
-		""" 
-		Returns the number of blanks (zeroes) in the
-		two given bit representations for X and O.
-
-		"""
 		bits = xRep | oRep
 		count = 0
 		for i in range(9):
@@ -230,10 +212,6 @@ class TTTGameNode:
 		return count
 
 	def _isFull(self):
-		"""
-		Returns true if the board is full and the game has ended.
-		
-		"""
 		for row in range(3):
 			for col in range(3):
 				if self.board[row][col] == BLANK: return False
@@ -245,26 +223,8 @@ class TTTDiscretePlayer:
 		self.opponent = PlayTTT.getOpponent(player)
 		self.totalChips = totalChips
 
-		# nodesToDiscreteRich is a list of dictionaries that hold
-		# entries of the form
-		#
-		# gameNode : discrete-Richman value.
-		#
-		# The nodes are partitioned by their distance away from a
-		# full state, such that nodesToDiscreteRich[k] carries all
-		# entries with node-keys that are k steps away from a full
-		# state.
 		self.nodesToDiscreteRich = [{},{},{},{},{},{},{},{},{},{}]
-
-		# nodesToMoveBid is a list of dictionaries that hold
-		# entries of the form
-		#
-		# gameNode : (optimalMove, optimalBid),
-		#
-		# where optimalMove is of the form (row, col). The nodes 
-		# are partitioned by their distance away from a full state
 		self.nodesToMoveBid = [{},{},{},{},{},{},{},{},{},{}]
-
 		self.generateStrategy()
 
 	def getMoveBid(self,currentNode):
