@@ -63,9 +63,6 @@ def getNodes(i):
 		nodes.append(node)
 	return nodes
 
-
-
-
 class TTTGameNode:
 	def __init__(self, board=None):
 		if not board:
