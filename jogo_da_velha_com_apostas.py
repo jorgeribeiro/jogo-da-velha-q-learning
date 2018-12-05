@@ -290,23 +290,21 @@ class TTTDiscretePlayer:
 				self.nodesToDiscreteRich[i][node] = math.floor(Fsum/2.0) + epsilon
 				self.nodesToMoveBid[i][node] = (node.generateMove(favoredChild), bid)
 		
-class PlayTTT:		
+class PlayTTT:	
 	def __init__(self):
-		self.biddingType = 'd'
+		self.biddingType = 'd' # discrete values
 		self.gamenode = TTTGameNode()
 
 		chipNo = self._queryChipCount()
 		agentChips = float(math.ceil(0.5*chipNo))
 		self.chips = {X:chipNo-agentChips,O:agentChips}
-		self.rules = "Jogo da velha com apostas."	
+		self.rules = "Jogo da velha com apostas."
 		self.agent = TTTDiscretePlayer(O, chipNo)
-		print self.agent.nodesToDiscreteRich[9][self.gamenode]
 
 		self.agentLastBid = None
-
 		self.userWonLastBid = -1
 
-		debug(str(time.time()) + "\tIniciando jogo...")
+		print "\tIniciando jogo..."
 		self.playDiscrete()
 
 	def updateGameState(self, player, move, bid):
