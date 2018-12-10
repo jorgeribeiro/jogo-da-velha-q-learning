@@ -232,7 +232,7 @@ class TTTDiscretePlayer:
 		return move,bid
 
 	def generateStrategy(self):
-		print "\tCarregando arquivos de treinamento..."
+		print "\tGerando estratégia..."
                 distances = os.getcwd() + "/.distances"
                 if not os.path.exists(distances):
                         partitionByDistance()
@@ -254,9 +254,9 @@ class TTTDiscretePlayer:
 				elif node.isWin(self.opponent):
 					self.nodesToDiscreteRich[i][node] = self.totalChips + 1.0
 					continue
-					
-				Fmax = -1.0
-				Fmin = sys.maxint 
+				
+				Fmin = sys.maxint	
+				Fmax = -1.0				 
 				myChildren = node.generateChildren(self.player)
 				oppChildren = node.generateChildren(self.opponent)
 
