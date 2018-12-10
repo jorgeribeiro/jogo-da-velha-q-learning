@@ -32,6 +32,8 @@ def partitionByDistance():
 		writers[i] = open(".distances/distance" + str(i), "w")
 
 	f = open(".legalStates", "r")
+	print "here"
+	exit()
 	lines = f.readlines()
 	f.close()
 
@@ -295,11 +297,17 @@ class PlayTTT:
 		self.biddingType = 'd' # discrete values
 		self.gamenode = TTTGameNode()
 
-		chipNo = self._queryChipCount()
+		# chipNo = self._queryChipCount()
+		chipNo = 100
 		agentChips = float(math.ceil(0.5*chipNo))
 		self.chips = {X:chipNo-agentChips,O:agentChips}
-		self.rules = "Jogo da velha com apostas."
+		self.rules = "Jogo da velha com apostas (50 fichas)."
 		self.agent = TTTDiscretePlayer(O, chipNo)
+
+		if self._queryStartWithTieBreakingChip():
+			self.chips[X] += 0.5
+		else:
+			self.chips[O] += 0.5
 
 		self.agentLastBid = None
 		self.userWonLastBid = -1
@@ -435,6 +443,16 @@ class PlayTTT:
 		else:
 			print "\n\n"
 
+	def _queryStartWithTieBreakingChip(self):
+		while True:
+			flush()
+			answer = raw_input("Gostaria de iniciar com a ficha de desempate? ('s' or 'n')? ").lower()
+			if answer[0] == 's':
+				return True
+			elif answer[0] == 'n':
+				return False
+			continue
+
 	def _queryChipCount(self):
 		query = "Informe o total de fichas do jogo: "
 		while True:
@@ -448,7 +466,7 @@ class PlayTTT:
 		return chips
 			
 	def _queryUseTieBreakingChip(self):
-		query = "Houve empate nas apostas. Gostaria de usar o criterio de desempate? ('s' ou 'n')? "
+		query = "Houve empate nas apostas. Gostaria de usar a ficha de desempate? ('s' ou 'n')? "
 		while True:
 			self._printStatus()
 			answer = raw_input(query).lower()
