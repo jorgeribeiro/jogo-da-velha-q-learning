@@ -228,11 +228,11 @@ class TTTDiscretePlayer:
 
 	def getMoveBid(self,currentNode):
 		numBlanks = TTTGameNode.numMissing(currentNode.getXRep(),currentNode.getORep())
-		move,bid = self.nodesToMoveBid[numBlanks][currentNode]
+		move,bid = self.nodesToMoveBid[numBlanks][currentNode]		
 		return move,bid
 
 	def generateStrategy(self):
-		print "\tGerando estratégia..."
+		print "\tGerando estrategia..."
                 distances = os.getcwd() + "/.distances"
                 if not os.path.exists(distances):
                         partitionByDistance()
@@ -334,6 +334,8 @@ class PlayTTT:
 			userMove = self._queryMove()
 
 			agentMove,agentBid = self.agent.getMoveBid(self.gamenode)
+			if agentBid > self.chips[O]:
+				agentBid = self.chips[O]
 			agentHasTieBreaker = ((self.chips[O] % 1) == 0.5)
 
 			if agentBid % 1 == 0.25:
